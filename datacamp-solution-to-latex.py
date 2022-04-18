@@ -24,7 +24,7 @@ def makeListUnique(list):
             returnList.append(i)
     return returnList
 
-url = "https://campus.datacamp.com/courses/ai-fundamentals/introduction-to-ai?ex=4"
+url = "https://campus.datacamp.com/courses/biomedical-image-analysis-in-python/exploration?ex=2"
 req = requests.get(url)
 result = html.unescape(re.search("window.PRELOADED_STATE = (.*)</script>", req.text).group(1)[:-1]).replace('\\"', "'").replace("\\'", "'").replace('\\\\t', '  ')
 
@@ -73,8 +73,8 @@ for url in makeListUnique(urls):
     # generate Latex
     if solLines[0] != '':
         if previousChapter != chapter:
-            latexString = latexString + r"\section{" + chapter + r"}" + "\n"
-        latexString = latexString + r"\subsection{" + exerciseTitle + r"}" + "\n"
+            latexString = latexString + r"\section{" + chapter.replace("_", "\_") + r"}" + "\n"
+        latexString = latexString + r"\subsection{" + exerciseTitle.replace("_", "\_") + r"}" + "\n"
         latexString = latexString + r"\begin{lstlisting}[tabsize=2]" + "\n"
         for line in solLines:
             latexString = latexString + line + "\n"
